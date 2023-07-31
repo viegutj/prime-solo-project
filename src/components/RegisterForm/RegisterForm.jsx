@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { TextField, Button, Typography } from '@mui/material';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -21,38 +22,30 @@ function RegisterForm() {
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <Typography variant='h4'>Register</Typography>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
         </h3>
       )}
       <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
+      <TextField id="outlined-basic" label="username" variant="outlined" 
+                  type="text"
+                  name="username"
+                  value={username}
+                  required
+                  onChange={(event) => setUsername(event.target.value)}/>
       </div>
       <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
+      <TextField id="outlined-basic" label="password" variant="outlined" 
+                  type="password"
+                  name="password"
+                  value={password}
+                  required
+                  onChange={(event) => setPassword(event.target.value)}/>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+        <Button variant='contained' className="btn" type="submit" name="submit" value="Register" >Register</Button>
       </div>
     </form>
   );

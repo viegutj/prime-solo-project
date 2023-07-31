@@ -6,13 +6,17 @@ import React from 'react';
 // or even care what the redux state is'
 
 function AboutPage() {
-  return (
-    <div className="container">
-      <div>
-        <p>This about page is for anyone to read!</p>
-      </div>
-    </div>
-  );
+    return (
+        <div className="container">
+            <div>
+                <p>Fitness Randomizer is a mobile-first web application that allows clients to generate random workouts for a specific body part. Resistance training often becomes repetitive; this is a way to add some variation and keep the client engaged in their fitness habits!</p>
+
+                <p>
+                    Clients can generate random workouts for a specific muscle group, save those workouts for later, modify and comment on existing workouts, and delete workouts from their saved list.
+                </p>
+            </div>
+        </div>
+    );
 }
 
 export default AboutPage;
