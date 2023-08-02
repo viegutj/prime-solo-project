@@ -17,8 +17,10 @@ import AboutPage from '../AboutPage/AboutPage';
 import CreateWorkout from '../CreateWorkout/CreateWorkout';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ConfirmWorkout from '../ConfirmWorkout/ConfirmWorkout';
 
 import './App.css';
+
 function App() {
   const dispatch = useDispatch();
 
@@ -56,7 +58,6 @@ function App() {
           >
             <CreateWorkout />
           </ProtectedRoute>
-
           <Route
             exact
             path="/login"
@@ -84,6 +85,10 @@ function App() {
               <RegisterPage />
             }
           </Route>
+
+          <ProtectedRoute path='/confirmworkout'>
+            <ConfirmWorkout />
+          </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

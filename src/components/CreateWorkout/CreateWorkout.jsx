@@ -11,25 +11,23 @@ import {
 } from '@mui/material';
 
 
-
-
 function CreateWorkout() { // this component doesn't do much to start, just renders some user reducer info to the DOM
-  const dispatch = useDispatch();
-  
-  function handleDispatchWorkout() {
-    // console.log('handler equipment', equipment);
-    // console.log('handler muscle', muscle);
-      // once our submit is clicked, dispatch an action
-      // to send a GET request to the API and route client
-      // to the "Confirm Workout" view
-      dispatch({
-          type: 'FETCH_WORKOUT',
-          payload: {
-              equipment: equipment,
-              muscle: muscle
-          }
-      })
-  }
+    const dispatch = useDispatch();
+
+    function handleDispatchWorkout() {
+        // console.log('handler equipment', equipment);
+        // console.log('handler muscle', muscle);
+        // once our submit is clicked, dispatch an action
+        // to send a GET request to the API and route client
+        // to the "Confirm Workout" view
+        dispatch({
+            type: 'FETCH_WORKOUT',
+            payload: {
+                equipment: equipment,
+                muscle: muscle
+            }
+        })
+    }
     const user = useSelector((store) => store.user);
     // creating local state for user inputs
     const [equipment, setEquipment] = useState((''));
