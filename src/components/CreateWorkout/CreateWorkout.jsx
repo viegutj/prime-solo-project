@@ -23,7 +23,7 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
       // to send a GET request to the API and route client
       // to the "Confirm Workout" view
       dispatch({
-        type: 'CREATE_WORKOUT',
+        type: 'FETCH_WORKOUT',
         payload: 
         {
           equipment: equipment,

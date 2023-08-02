@@ -6,6 +6,7 @@ import {
     ListItemText,
     Button
 } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
 import React, {useState} from 'react';
 import {Link} from "react-router-dom/cjs/react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
@@ -51,7 +52,7 @@ function DrawerComponent() { // we are setting a piece of state to determine if 
                 () => {
                     setOpen(true)
                 }
-            }>nav drawer
+            }><MenuIcon/>
             </Button>
             <Drawer open={open}
                 anchor={'right'}
