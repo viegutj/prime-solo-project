@@ -9,7 +9,6 @@ function Nav() {
 
     return (
         <div className="nav">
-            <div> {/* If a user is logged in, show these links */}
                 {
                 user.id && (
                     <>
@@ -20,7 +19,7 @@ function Nav() {
                         <DrawerComponent/>
                     </>
                 )
-            } </div>
+            }
         </div>
     );
 }
