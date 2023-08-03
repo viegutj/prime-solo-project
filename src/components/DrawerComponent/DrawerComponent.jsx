@@ -27,9 +27,7 @@ function DrawerComponent() { // we are setting a piece of state to determine if 
                     <Link to="/user">
                         Home
                     </Link>,
-                    <Link to="/confirmworkout">
-                    Workouts
-                    </Link>,
+                    'Workouts',
                     <Link to="/about">
                         About
                     </Link>,

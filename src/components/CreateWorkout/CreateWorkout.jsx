@@ -9,10 +9,12 @@ import {
     InputLabel,
     Button
 } from '@mui/material';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 function CreateWorkout() { // this component doesn't do much to start, just renders some user reducer info to the DOM
     const dispatch = useDispatch();
+    const history = useHistory();
 
     function handleDispatchWorkout() {
         // console.log('handler equipment', equipment);
@@ -27,6 +29,7 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
                 muscle: muscle
             }
         })
+        history.push('/confirmworkout')
     }
     const user = useSelector((store) => store.user);
     // creating local state for user inputs
