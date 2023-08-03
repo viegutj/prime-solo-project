@@ -35,7 +35,10 @@ router.get('/:muscle', rejectUnauthenticated, (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => { // POST route code here
+router.post('/', rejectUnauthenticated, (req, res) => { 
+    // POST route code here
+    console.log('in server side POST route!');
+
 });
 
 module.exports = router;

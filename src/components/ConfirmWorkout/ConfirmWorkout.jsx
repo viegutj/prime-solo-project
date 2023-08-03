@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 
 function ConfirmWorkout() { // import the created data from the API GET
     const workout = useSelector((store) => store.create);
+    console.log('workout', workout);
     const history = useHistory();
     const dispatch = useDispatch();
     
@@ -35,7 +36,7 @@ function ConfirmWorkout() { // import the created data from the API GET
                 return(
                 <>
                 <img src="https://i.pinimg.com/550x/f9/52/6a/f9526a943772f04f69cda6bcdb5b1d00.jpg" alt="generic exercise" />
-                <li>{exercise.name}</li>
+                <li key={exercise.name}>{exercise.name}</li>
                 <ul>
                 <li>{exercise.muscle}</li>
                 <li>{exercise.equipment}</li>

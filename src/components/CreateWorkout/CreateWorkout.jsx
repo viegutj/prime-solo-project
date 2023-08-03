@@ -9,14 +9,15 @@ import {
     InputLabel,
     Button
 } from '@mui/material';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import {useHistory} from 'react-router-dom/cjs/react-router-dom.min';
 
 
 function CreateWorkout() { // this component doesn't do much to start, just renders some user reducer info to the DOM
     const dispatch = useDispatch();
     const history = useHistory();
 
-    function handleDispatchWorkout() {
+    function handleDispatchWorkout(event) {
+        event.preventDefault();
         // console.log('handler equipment', equipment);
         // console.log('handler muscle', muscle);
         // once our submit is clicked, dispatch an action
@@ -49,68 +50,72 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
     // console.log('equipment', muscle);
 
     // return our html to render
-    return (<div className="container">
-        <h2>Welcome, {
-            user.username
-        }!</h2>
-        <h3>Select your equipment and muscle group. Press "Create" to create a workout!</h3>
-        <div>
-            <FormControl sx={
-                    {
-                        m: 1,
-                        minWidth: 120
-                    }
-                }
-                size="small">
-                <InputLabel>Equipment</InputLabel>
-                <Select labelId="equipment" id="equipment-select" required
-                    value={equipment}
-                    label="equipment"
-                    onChange={handleEquipment}>
-                    <MenuItem value={"body_only"}>Bodyweight</MenuItem>
-                    <MenuItem value={"dumbbell"}>Dumbell</MenuItem>
-                    <MenuItem value={"barbell"}>Barbell</MenuItem>
-                </Select>
-            </FormControl>
+    return (
+        <div className="container">
+            <form onSubmit={handleDispatchWorkout}>
+                <h2>Welcome, {
+                    user.username
+                }!</h2>
+                <h3>Select your equipment and muscle group. Press "Create" to create a workout!</h3>
+                <div>
+                    <FormControl sx={
+                            {
+                                m: 1,
+                                minWidth: 120
+                            }
+                        }
+                        size="small">
+                        <InputLabel>Equipment</InputLabel>
+                        <Select labelId="equipment" id="equipment-select" 
+                            required
+                            value={equipment}
+                            label="equipment"
+                            onChange={handleEquipment}>
+                            <MenuItem value={"body_only"}>Bodyweight</MenuItem>
+                            <MenuItem value={"dumbbell"}>Dumbell</MenuItem>
+                            <MenuItem value={"barbell"}>Barbell</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+                <div>
+                    <FormControl sx={
+                            {
+                                m: 1,
+                                minWidth: 120
+                            }
+                        }
+                        size="small">
+                        <InputLabel>Muscle</InputLabel>
+                        <Select labelId="muscle" id="muscle-select" 
+                            required
+                            value={muscle}
+                            label="muscle"
+                            onChange={handleMuscle}>
+                            <MenuItem value={"abdominals"}>Abdominals</MenuItem>
+                            <MenuItem value={"abductors"}>Abductors</MenuItem>
+                            <MenuItem value={"adductors"}>Adductors</MenuItem>
+                            <MenuItem value={"biceps"}>Biceps</MenuItem>
+                            <MenuItem value={"calves"}>Calves</MenuItem>
+                            <MenuItem value={"chest"}>Chest</MenuItem>
+                            <MenuItem value={"forearms"}>Forearms</MenuItem>
+                            <MenuItem value={"glutes"}>Glutes</MenuItem>
+                            <MenuItem value={"hamstrings"}>Hamstrings</MenuItem>
+                            <MenuItem value={"lats"}>Lats</MenuItem>
+                            <MenuItem value={"lower_back"}>Lower Back</MenuItem>
+                            <MenuItem value={"middle_back"}>Middle Back</MenuItem>
+                            <MenuItem value={"neck"}>Neck</MenuItem>
+                            <MenuItem value={"quadriceps"}>Quadriceps</MenuItem>
+                            <MenuItem value={"traps"}>Traps</MenuItem>
+                            <MenuItem value={"triceps"}>Triceps</MenuItem>
+                        </Select>
+                    </FormControl>
+
+                </div>
+
+                <Button variant='contained' name="submit" type='submit' value='Submit'>Submit</Button>
+            </form>
         </div>
-        <div>
-            <FormControl sx={
-                    {
-                        m: 1,
-                        minWidth: 120
-                    }
-                }
-                size="small">
-                <InputLabel>Muscle</InputLabel>
-                <Select labelId="muscle" id="muscle-select" required
-                    value={muscle}
-                    label="muscle"
-                    onChange={handleMuscle}>
-                    <MenuItem value={"abdominals"}>Abdominals</MenuItem>
-                    <MenuItem value={"abductors"}>Abductors</MenuItem>
-                    <MenuItem value={"adductors"}>Adductors</MenuItem>
-                    <MenuItem value={"biceps"}>Biceps</MenuItem>
-                    <MenuItem value={"calves"}>Calves</MenuItem>
-                    <MenuItem value={"chest"}>Chest</MenuItem>
-                    <MenuItem value={"forearms"}>Forearms</MenuItem>
-                    <MenuItem value={"glutes"}>Glutes</MenuItem>
-                    <MenuItem value={"hamstrings"}>Hamstrings</MenuItem>
-                    <MenuItem value={"lats"}>Lats</MenuItem>
-                    <MenuItem value={"lower_back"}>Lower Back</MenuItem>
-                    <MenuItem value={"middle_back"}>Middle Back</MenuItem>
-                    <MenuItem value={"neck"}>Neck</MenuItem>
-                    <MenuItem value={"quadriceps"}>Quadriceps</MenuItem>
-                    <MenuItem value={"traps"}>Traps</MenuItem>
-                    <MenuItem value={"triceps"}>Triceps</MenuItem>
-
-                </Select>
-            </FormControl>
-        </div>
-
-        <Button variant='contained'
-            onClick={handleDispatchWorkout}>Submit</Button>
-
-    </div>);
+    );
 }
 
 // this allows us to use <App /> in index.js
