@@ -22,7 +22,7 @@ router.get('/:muscle', rejectUnauthenticated, (req, res) => {
         headers: {
             'X-Api-Key': key
         }
-    }).then(response =>{
+    }).then(response => {
         console.log('response is:', response.data);
         res.send(response.data);
     }).catch(error => {
@@ -35,10 +35,54 @@ router.get('/:muscle', rejectUnauthenticated, (req, res) => {
 /**
  * POST route template
  */
-router.post('/', rejectUnauthenticated, (req, res) => { 
-    // POST route code here
+router.post('/', rejectUnauthenticated, (req, res) => { // POST route code here
     console.log('in server side POST route!');
+    console.log('req.body is: ', req.body);
 
+    
+
+    // We will have to make two queries here. We need to insert this workout into our "workouts" table
+    // as well as our "exercise" table. They are related via the foreign key of "workout_id" in "exercises" table.
+
+    // We also need to send the "user_id" in the "workouts" query.
+
+    // first query is for the "workouts" table, adding the name, rating (not really, they haven't entered it yet), and user id.
+    const insertWorkoutQuery = `
+    INSERT INTO "workouts" ("user_id")
+    VALUES ($1)
+    `
+    // returning ID would be in the response.
+    // I don't understand what RETURNING does? Do I need it here? I used it in the "movies" assignment,
+        // but don't know what it does.
+
+    // FIRST query makes workout
+    pool.query(insertWorkoutQuery, [req.body.user_id])
+    .then(result => { // we will need to identify the workout id
+        console.log('result.rows[0].id is:', result.rows[0].id);
+        let createdWorkoutId = result.rows[0].id;
+
+        // SECOND query is for the "exercises" table, adding muscle, equipment, name, instructions, notes, and workout id.
+        // We need to do this multiple times. How does that work?
+        const insertExercisesQuery = `INSERT INTO "exercises" ("muscle", "equipment", "name", "instructions", "workout_id")
+        VALUES  ($1, $2, $3, $4, $5, $6);
+        `
+        pool.query(insertExercisesQuery, [
+            req.body.workout.muscle,
+            req.body.workout.equipment,
+            req.body.workout.name,
+            req.body.workout.instructions,
+            req.body.workout.id,
+            createdWorkoutId
+        ]).then(result => {
+            console.log('result is: ', result);
+            res.sendStatus(201);
+        }).catch(error => {
+            console.log('error with second query, exercises', error);
+        })
+        
+    }).catch(error => {
+        console.log('error with first query, workout');
+    })
 });
 
 module.exports = router;

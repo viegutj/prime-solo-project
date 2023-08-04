@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 
 function ConfirmWorkout() { // import the created data from the API GET
     const workout = useSelector((store) => store.create);
+    const user = useSelector((store) => store.user);
     console.log('workout', workout);
     const history = useHistory();
     const dispatch = useDispatch();
@@ -19,7 +20,10 @@ function ConfirmWorkout() { // import the created data from the API GET
         dispatch({
             type: 'SAVE_WORKOUT',
             // we are sending the created workout as the payload
-            payload: workout
+            payload: {
+                workout: workout,
+                user_id: user.id
+            }
         })
     }
     // function to handle the back button

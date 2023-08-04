@@ -5,7 +5,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* saveWorkout(action){
     try{
         // communicate with server to POST data
-        const response = yield axios.post('/api/create/', action.payload)
+        yield axios.post('/api/create/', action.payload)
 
         // dispatch (put) an action to communicate with our reducer and update state
         yield put({type: "SET_NEW_WORKOUT", payload: response})
