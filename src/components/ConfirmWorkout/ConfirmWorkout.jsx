@@ -8,9 +8,23 @@ import { Button } from "@mui/material";
 function ConfirmWorkout() { // import the created data from the API GET
     const workout = useSelector((store) => store.create);
     const user = useSelector((store) => store.user);
-    console.log('workout', workout);
+    // console.log('workout', workout);
     const history = useHistory();
     const dispatch = useDispatch();
+
+    //function to handle details
+    const handleDetails = (exercise) => {
+        console.log('details click!');
+        console.log('exercise: ', exercise);
+        // dispatch an action to create a piece of state for details
+            // we're not doing any server actions, so we can send this straight to reducer.
+        dispatch({
+            type: 'STORE_DETAILS',
+            payload: exercise
+        })
+        // route the user to the Details component
+        history.push('/exercisedetails')
+    }
     
     // function to handle the save button (POST)
     const handleSave = () => {
@@ -28,6 +42,7 @@ function ConfirmWorkout() { // import the created data from the API GET
     }
     // function to handle the back button
     const handleBack = () => {
+        console.log('back button clicked!');
         history.push('/')
     }
 
@@ -35,22 +50,19 @@ function ConfirmWorkout() { // import the created data from the API GET
     <>
         <Button onClick={handleBack}>Back</Button>
         <h1>Confirm Workout</h1>
+        <h2>{workout?.[0]?.muscle}</h2>
         <ol>
             {workout?.map((exercise) => {
                 return(
                 <>
-                <img src="https://i.pinimg.com/550x/f9/52/6a/f9526a943772f04f69cda6bcdb5b1d00.jpg" alt="generic exercise" />
+                <div onClick={() => handleDetails(exercise)}>
+                <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found" />
                 <li key={exercise.name}>{exercise.name}</li>
-                <ul>
-                <li>{exercise.muscle}</li>
-                <li>{exercise.equipment}</li>
-                <li>{exercise.instructions}</li>
-                </ul>
+                </div>
                 </>
                 )
             })}
         </ol>
-        <pre>{JSON.stringify(workout)}</pre>
         <Button onClick={handleSave}>Save Workout</Button>
     </>
     )

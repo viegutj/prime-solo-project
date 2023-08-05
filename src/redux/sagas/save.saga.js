@@ -8,7 +8,7 @@ function* saveWorkout(action){
         yield axios.post('/api/create/', action.payload)
 
         // dispatch (put) an action to communicate with our reducer and update state
-        yield put({type: "SET_NEW_WORKOUT", payload: response})
+        // yield put({type: "SET_NEW_WORKOUT", payload: response})
 
     }catch(error){
         console.log('POST request failed', error);
@@ -18,7 +18,7 @@ function* saveWorkout(action){
 
 // function that is listening for user action of "SAVE_WORKOUT"
 function* saveSaga(){
-    yield takeLatest("SAVE_WORKOUT", saveWorkout)
+    yield takeLatest("SAVE_WORKOUT", saveWorkout);
 }
 
 export default saveSaga;
