@@ -12,6 +12,7 @@ function ConfirmWorkout() { // import the created data from the API GET
     const history = useHistory();
     const dispatch = useDispatch();
 
+
     //function to handle details
     const handleDetails = (exercise) => {
         console.log('details click!');
@@ -39,6 +40,7 @@ function ConfirmWorkout() { // import the created data from the API GET
                 user_id: user.id
             }
         })
+        history.push('savedworkouts');
     }
     // function to handle the back button
     const handleBack = () => {

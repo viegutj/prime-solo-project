@@ -10,6 +10,7 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const createRouter = require('./routes/create.router');
+const workoutsRouter = require('./routes/workouts.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -25,6 +26,7 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/create/', createRouter);
+app.use('/api/workouts/', workoutsRouter);
 
 // Serve static files
 app.use(express.static('build'));

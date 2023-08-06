@@ -26,7 +26,7 @@ router.get('/:muscle', rejectUnauthenticated, (req, res) => {
         console.log('response is:', response.data);
         res.send(response.data);
     }).catch(error => {
-        console.log('error in server GET');
+        console.log('error in server GET', error);
         res.sendStatus(500);
     })
 

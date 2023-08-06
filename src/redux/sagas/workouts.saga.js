@@ -5,7 +5,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* fetchWorkouts(action){
     try{
         // communicate with server to GET data
-        yield axios.get('/api/create/', action.payload);
+        const response = yield axios.get('/api/workouts/', action.payload);
 
         // dispatch (put) an action to communicate with our reducer and update state
             // reducer will be listening for "SET_USER_WORKOUTS"
@@ -18,8 +18,8 @@ function* fetchWorkouts(action){
 }
 
 // function that is listening for user action of "FETCH_USER_WORKOUTS"
-function* saveSaga(){
+function* workoutsSaga(){
     yield takeLatest("FETCH_USER_WORKOUTS", fetchWorkouts);
 }
 
-export default saveSaga;
+export default workoutsSaga;
