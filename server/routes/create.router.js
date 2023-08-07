@@ -4,10 +4,6 @@ const router = express.Router();
 const axios = require('axios')
 const {rejectUnauthenticated} = require('../modules/authentication-middleware')
 
-/**
- * GET route template
- */
-
 router.get('/:muscle', rejectUnauthenticated, (req, res) => {
     // GET route code here
     // req.params.something gives us access to whatever is on the end of our request
@@ -32,9 +28,7 @@ router.get('/:muscle', rejectUnauthenticated, (req, res) => {
 
 });
 
-/**
- * POST route template
- */
+
 router.post('/', rejectUnauthenticated, async (req, res) => { // POST route code here
     console.log('in server side POST route!');
     console.log('req.body is: ', req.body);
@@ -59,11 +53,17 @@ router.post('/', rejectUnauthenticated, async (req, res) => { // POST route code
         const result = await connection.query(insertWorkoutQuery, [req.body.user_id, 'Workout', '0'])
         let createdWorkoutId = result.rows[0].id;
         // make a query to POST all 10 exercises
-            // QUESTION: How will I get the workout_id?
-            // SOLVED: we store the result in a variable and use the
-                // same syntax as before
+        // QUESTION: How will I get the workout_id?
+        // SOLVED: we store the result in a variable and use the
+        // same syntax as before
         for (exercise of req.body.workout) {
-            await connection.query(insertExercisesQuery, [exercise.muscle, exercise.equipment, exercise.name, exercise.instructions, createdWorkoutId])
+            await connection.query(insertExercisesQuery, [
+                exercise.muscle,
+                exercise.equipment,
+                exercise.name,
+                exercise.instructions,
+                createdWorkoutId
+            ])
         }
         await connection.query('COMMIT');
         console.log('success in async/await: WOOT!');
@@ -78,4 +78,5 @@ router.post('/', rejectUnauthenticated, async (req, res) => { // POST route code
         // This is super important!
         connection.release();
     }
-});module.exports = router;
+});
+module.exports = router;

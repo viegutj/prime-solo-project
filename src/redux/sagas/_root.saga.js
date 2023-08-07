@@ -7,6 +7,7 @@ import saveSaga from './save.saga';
 import detailsSaga from './details.saga';
 import workoutsSaga from './workouts.saga';
 import deleteWorkout from './deleteWorkout.saga';
+import grabEditDetailsSaga from './grabDetails.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -25,5 +26,6 @@ export default function* rootSaga() {
     detailsSaga(),
     workoutsSaga(),
     deleteWorkout(),
+    grabEditDetailsSaga(),
   ]);
 }
