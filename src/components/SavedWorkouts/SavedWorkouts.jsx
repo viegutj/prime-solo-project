@@ -32,6 +32,8 @@ function SavedWorkouts() { // grab the user id from store
             type: 'DELETE_WORKOUT',
             payload: workout
         })
+
+        dispatch({type: 'FETCH_USER_WORKOUTS', payload: user.id})
     }
 
     return (
@@ -47,7 +49,7 @@ function SavedWorkouts() { // grab the user id from store
                                 workout.id
                             }>
                                 Name: {
-                                workout.name
+                                workout.id
                             }, Rating: {
                                 workout.rating
                             }</li>
