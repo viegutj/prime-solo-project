@@ -4,6 +4,7 @@ import user from './user.reducer';
 import create from './create.reducer'
 import details from './details.reducer';
 import workouts from './workouts.reducer';
+import specificWorkout from './specificWorkout.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   create, // contains data from API GET request
   details, // contains data for exercise that client clicks on
   workouts, // contains all user workouts
+  specificWorkout, // contains the details of a single workout
 });
 
 export default rootReducer;
