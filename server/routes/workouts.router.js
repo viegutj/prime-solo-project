@@ -9,10 +9,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     // GET route code here
 
     console.log('in server side POST route!');
-    console.log('req.body is: ', req.body);
+    console.log('req.body is: ', req.params);
 
     // queryText: we want to select all of the user's workouts
-    const queryText = `SELECT * WHERE "user_id" = ${req.body.user_id}`
+    const queryText = `SELECT * WHERE "user_id" = ${req.params.user_id}`
 
     axios.get('/', rejectUnauthenticated, (req, res) => {
         // pool.query to communicate with db

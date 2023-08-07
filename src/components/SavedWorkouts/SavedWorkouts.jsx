@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 function SavedWorkouts() {
     
     // grab the user id from store
-    const user = useSelector((store) => store.user.id)
+    const user = useSelector((store) => store.user)
     const dispatch = useDispatch();
 
     
@@ -14,10 +14,9 @@ function SavedWorkouts() {
     useEffect(
         dispatch({
         type: 'FETCH_USER_WORKOUTS',
-        payload: user,
+        payload: user.id,
         })
     );
-
 
     return(
         <h1>Saved Workouts</h1>
