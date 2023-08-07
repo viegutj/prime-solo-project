@@ -7,7 +7,7 @@ function* fetchWorkouts(action){
         console.log('action.payload', action.payload);
 
         // communicate with server to GET data
-        const response = yield axios.get('/api/workouts/', action.payload);
+        const response = yield axios.get(`/api/workouts/${action.payload}`);
 
         // dispatch (put) an action to communicate with our reducer and update state
             // reducer will be listening for "SET_USER_WORKOUTS"

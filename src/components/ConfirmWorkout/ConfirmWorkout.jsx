@@ -37,10 +37,11 @@ function ConfirmWorkout() { // import the created data from the API GET
             // we are sending the created workout as the payload
             payload: {
                 workout: workout,
-                user_id: user.id
+                user_id: user.id,
+                history: history,
             }
-        })
-        history.push('savedworkouts');
+        });
+        // history.push('/savedworkouts');
     }
     // function to handle the back button
     const handleBack = () => {
@@ -59,7 +60,7 @@ function ConfirmWorkout() { // import the created data from the API GET
                 <>
                 <div onClick={() => handleDetails(exercise)}>
                 <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found" />
-                <li key={exercise.name}>{exercise.name}</li>
+                <li key={exercise.id}>{exercise.name}</li>
                 </div>
                 </>
                 )

@@ -26,7 +26,7 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
         dispatch({
             type: 'FETCH_WORKOUT',
             payload: {
-                equipment: equipment,
+                // equipment: equipment,
                 muscle: muscle
             }
         })
@@ -57,7 +57,7 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
                     user.username
                 }!</h2>
                 <h3>Select your equipment and muscle group. Press "Create" to create a workout!</h3>
-                <div>
+                {/* <div>
                     <FormControl sx={
                             {
                                 m: 1,
@@ -76,7 +76,7 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
                             <MenuItem value={"barbell"}>Barbell</MenuItem>
                         </Select>
                     </FormControl>
-                </div>
+                </div> */}
                 <div>
                     <FormControl sx={
                             {

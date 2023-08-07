@@ -5,16 +5,15 @@ const axios = require('axios')
 const {rejectUnauthenticated} = require('../modules/authentication-middleware')
 
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/:user_id', rejectUnauthenticated, (req, res) => {
     // GET route code here
 
-    console.log('in server side POST route!');
-    console.log('req.body is: ', req.params);
+    console.log('in server side GET route!');
+    console.log('req.params is: ', req.params);
 
     // queryText: we want to select all of the user's workouts
-    const queryText = `SELECT * WHERE "user_id" = ${req.params.user_id}`
+    const queryText = `SELECT * FROM "workout" WHERE "user_id" = ${req.params.user_id}`
 
-    axios.get('/', rejectUnauthenticated, (req, res) => {
         // pool.query to communicate with db
         pool.query(queryText)
             .then((result) => {
@@ -24,7 +23,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                 console.log('ERROR: Get all workouts', error);
                 res.sendStatus(500)
             })
-    })
 });
 
 
