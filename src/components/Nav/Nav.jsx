@@ -12,8 +12,8 @@ function Nav() {
                 {
                 user.id && (
                     <>
-                        <Link to="/home">
-                            <h2 className="nav-title">Prime Solo Project</h2>
+                        <Link to="/user">
+                            <h2 className="nav-title">Fitness MN</h2>
                         </Link>
 
                         <DrawerComponent/>
