@@ -18,7 +18,7 @@ function EditWorkout() { // grab workout details from state
 
         // dispatch an action to GET workout from our database,
         // with the delete changes we just made
-        dispatch({type: 'GRAB_EDIT_DETAILS', payload: workout_details})
+        // dispatch({type: 'GRAB_EDIT_DETAILS', payload: exercise})
     }
 
     return (
@@ -29,7 +29,7 @@ function EditWorkout() { // grab workout details from state
             <h3>Rating: {workout_details.rating}</h3>
 
             {
-            workout ?. map((exercise) => {
+            workout?.map((exercise) => {
                 return (
                     <>
                     <ol>
@@ -44,7 +44,7 @@ function EditWorkout() { // grab workout details from state
                         {/* handler must have the specific exercise information passed to it */}
 
                         <Button 
-                        onClick={() => {handleDelete(exercise)}}>
+                        onClick={() => handleDelete(exercise)}>
                             Delete Exercise
                         </Button>
                     </ol>
