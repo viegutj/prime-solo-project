@@ -20,6 +20,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ConfirmWorkout from '../ConfirmWorkout/ConfirmWorkout';
 import ExerciseDetails from '../ExerciseDetails/ExerciseDetails';
 import SavedWorkouts from '../SavedWorkouts/SavedWorkouts';
+import EditWorkout from '../EditWorkout/EditWorkout';
 
 import './App.css';
 
@@ -96,8 +97,12 @@ function App() {
             <ExerciseDetails />
           </ProtectedRoute>
 
-          <ProtectedRoute>
-            <SavedWorkouts exact patch='savedworkouts'/>
+          <ProtectedRoute exact path='/savedworkouts'>
+            <SavedWorkouts />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path='/editworkout'>
+            <EditWorkout />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

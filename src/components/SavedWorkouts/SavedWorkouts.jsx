@@ -15,11 +15,6 @@ function SavedWorkouts() { // grab the user id from store
         dispatch({type: 'FETCH_USER_WORKOUTS', payload: user.id})
     }, []);
 
-    // function to handle the back button
-    const handleBack = () => {
-        console.log('back button clicked!');
-        history.push('/confirmworkout')
-    }
 
     // function to handle the delete button
     const handleDelete = (workout) => {
@@ -28,33 +23,49 @@ function SavedWorkouts() { // grab the user id from store
         console.log('workout is: ', workout);
 
         // dispatch an action TO THE SAGA to delete the specified workout
-        dispatch({
-            type: 'DELETE_WORKOUT',
-            payload: workout
-        })
+        dispatch({type: 'DELETE_WORKOUT', payload: workout})
 
+        // dispatch an action to GET workout from our database,
+        // with the delete changes we just made
         dispatch({type: 'FETCH_USER_WORKOUTS', payload: user.id})
+    }
+
+    const handleEditWorkout = (workout) => {
+        console.log('edit workout clicked!');
+        console.log('workout is: ', workout);
+
+        // dispatch an action TO THE SAGA to GET the exercises for this specific workout
+            // then, store the exercise information in state
+        dispatch({type: 'GRAB_EDIT_DETAILS', payload: workout})
+
+
+        history.push('/editworkout');
     }
 
     return (
         <>
             <h1>Saved Workouts</h1>
-            <Button onClick={handleBack}>Back</Button>
             <div> {
                 workouts ?. map((workout) => {
                     return (
                         <ol>
                             <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found"/>
                             <li key={
-                                workout.id
-                            }>
+                                workout ?. id
+                            } onClick={() => handleEditWorkout(workout)}>
                                 Name: {
-                                workout.id
-                            }, Rating: {
-                                workout.rating
+                                workout ?. name
+                            },  ID: {
+                                workout ?. id
+                            },  Rating: {
+                                workout ?. rating
                             }</li>
                             {/* handler must have the specific workout information passed to it */}
-                            <Button onClick={() => {handleDelete(workout)}}>Delete</Button>
+                            <Button onClick={
+                                () => {
+                                    handleDelete(workout)
+                                }
+                            }>Delete</Button>
                         </ol>
                     )
                 })
