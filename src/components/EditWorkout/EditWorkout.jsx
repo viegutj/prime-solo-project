@@ -18,15 +18,15 @@ function EditWorkout() { // grab workout details from state
 
         // dispatch an action to GET workout from our database,
         // with the delete changes we just made
-        // dispatch({type: 'GRAB_EDIT_DETAILS', payload: exercise})
+        dispatch({type: 'GRAB_EDIT_DETAILS', payload: workout_details})
     }
 
     return (
         <>
             <h1>Edit Workout</h1>
-            <h2>Workout Name: {workout_details.name}</h2>
-            <h3>ID: {workout_details.id}</h3>
-            <h3>Rating: {workout_details.rating}</h3>
+            <h2>Workout Name: {workout_details?.name}</h2>
+            <h3>ID: {workout_details?.id}</h3>
+            <h3>Rating: {workout_details?.rating}</h3>
 
             {
             workout?.map((exercise) => {
@@ -35,16 +35,17 @@ function EditWorkout() { // grab workout details from state
                     <ol>
                         <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found"/>
                         <li key={exercise?.id}>
-                            Name: {exercise ?. name}
+                            Name: {exercise?.name}
                         </li>
-                            ID: {exercise ?. id},
+                            ID: {exercise?.id},
                             Muscle: {exercise?.muscle},
                             Equipment: {exercise?.equipment}
-                            <p>Instructions: {exercise ?. instructions}</p>
+                            <p>Instructions: {exercise?.instructions}</p>
                         {/* handler must have the specific exercise information passed to it */}
 
                         <Button 
-                        onClick={() => handleDelete(exercise)}>
+                        onClick={() => handleDelete(exercise)}
+                        >
                             Delete Exercise
                         </Button>
                     </ol>

@@ -9,6 +9,7 @@ try{
     //  console.log('action.payload: ', action.payload);
     // do a DELETE request to our server/router
     yield axios.delete(`/api/edit/${action.payload.id}`);
+    // do I need a put?
 
 }catch(error){
     console.log('removeExercise saga DELETE request failed', error);
