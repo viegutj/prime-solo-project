@@ -19,8 +19,24 @@ router.get('/:muscle', rejectUnauthenticated, (req, res) => {
             'X-Api-Key': key
         }
     }).then(response => {
-        console.log('response is:', response.data);
-        res.send(response.data);
+        // console.log('response is:', response.data);
+        
+        // randomize our array response
+        const shuffle = (array) => { 
+            return array.sort(() => Math.random() - 0.5); 
+        }; 
+        const shuffledArray = shuffle(response.data); 
+
+        const slicedArray = shuffledArray.slice(0, 5);
+
+        console.log(slicedArray);
+
+
+        // //only return five exercises
+        // shuffled.forEach((movie, index) => {
+        //     if(index >= 5) return;
+
+        res.send(slicedArray);
     }).catch(error => {
         console.log('error in server GET', error);
         res.sendStatus(500);
@@ -50,7 +66,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => { // POST route code
             VALUES  ($1, $2, $3, $4, $5);
             `
         // make a query to POST a workout
-        const result = await connection.query(insertWorkoutQuery, [req.body.user_id, 'Workout', '0'])
+        const result = await connection.query(insertWorkoutQuery, [req.body.user_id, 'Workout Name', '0'])
         let createdWorkoutId = result.rows[0].id;
         // make a query to POST all 10 exercises
         // QUESTION: How will I get the workout_id?
@@ -62,7 +78,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => { // POST route code
                 exercise.equipment,
                 exercise.name,
                 exercise.instructions,
-                createdWorkoutId
+                createdWorkoutId,
             ])
         }
         await connection.query('COMMIT');

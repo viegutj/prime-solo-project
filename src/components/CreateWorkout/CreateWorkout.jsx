@@ -112,7 +112,7 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
 
                 </div>
 
-                <Button variant='contained' name="submit" type='submit' value='Submit'>Submit</Button>
+                <Button variant='contained' name="submit" type='submit' value='Submit'>Create</Button>
             </form>
         </div>
     );

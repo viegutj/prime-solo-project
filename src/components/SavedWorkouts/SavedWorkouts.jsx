@@ -45,31 +45,21 @@ function SavedWorkouts() { // grab the user id from store
     return (
         <>
             <h1>Saved Workouts</h1>
-            <div> {
-                workouts ?. map((workout) => {
-                    return (
-                        <ol>
+            <ol>
+            {workouts?.map((workout) => {
+                return (
+                        <div>
                             <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found"/>
-                            <li key={
-                                workout ?. id
-                            } onClick={() => handleEditWorkout(workout)}>
-                                Name: {
-                                workout ?. name
-                            },  ID: {
-                                workout ?. id
-                            },  Rating: {
-                                workout ?. rating
-                            }</li>
-                            {/* handler must have the specific workout information passed to it */}
+                            <li key={workout?.id} onClick={() => handleEditWorkout(workout)}>
+                                Name: {workout?.id},  Rating: {workout?.rating}
+                            </li>
                             <Button onClick={
-                                () => {
-                                    handleDelete(workout)
-                                }
+                                () => {handleDelete(workout)}
                             }>Delete</Button>
-                        </ol>
-                    )
-                })
-            } </div>
+                            </div>
+                            )
+                        })}
+            </ol>
         </>
     )
 }
