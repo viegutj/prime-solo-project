@@ -7,6 +7,7 @@ function* saveWorkout(action){
         // communicate with server to POST data
         yield axios.post('/api/create/', action.payload)
         
+        // route us to our next page AFTER the post has been executed
         action.payload.history.push('/savedworkouts')
         // dispatch (put) an action to communicate with our reducer and update state
         // yield put({type: "SET_NEW_WORKOUT", payload: response})

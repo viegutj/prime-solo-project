@@ -14,44 +14,31 @@ const specificWorkoutReducer = (state = {}, action) => {
                     [action.payload.property]: action.payload.value
                 }
             }
-//         case 'EDIT_EXERCISE_ONCHANGE':
-//             if(){ // how do we write our conditional to match exercise.id?
-//                 return {
-//                     ...state,
-//                     server_response[]: [
-//                         ...state.server_response,
-//                         [action.payload.property]: action.payload.value
-//                     ]
-                    
-//                 }
-//             } else{
-//                 return state
-//             }
+        case 'EDIT_EXERCISE_ONCHANGE':
+                
+                return {
+                    // break apart our state with the spread operator
+                    ...state,
+                    // access the server_response array (within our current slice of state)
+                    server_response: 
+                    // loop through every exercise in our array, with a 
+                    // conditional checking for id matching
+                    state.server_response.map((exercise) => {
+                        if(exercise.id == action.payload.exercise.id){
+                            return {
+                                ...exercise,
+                                [action.payload.property]: action.payload.value
+                            }
+                        // if the exercise does not match, return the exercise with no changes
+                        } else{
+                            return exercise
+                        }
+                    })
+                }
+
         default:
             return state
     }
 }
 
-// -------------LECTURE CODE EXAMPLE SAGA-------------
-// hold only the single student object being edited
-// const studentToEdit = (state  = {}, action) => {
-//     if (action.type === 'SET_EDIT_STUDENT') {
-//         // Represents a student object
-//         return action.payload;
-//     }
-//     if (action.type === 'EDIT_ONCHANGE') {
-//         // Action.payload: { property: 'cohort', value: 'Diamon' }
-//         return {
-//             ...state,
-//             // 'first_name'
-//             // or 'last_name'
-//             [action.payload.property]: action.payload.value
-//             // cohort: 'Diamon'
-//         }
-//     }
-//     return state;
-// }
-
-// workout will be visible in the stat
-// via state.create
 export default specificWorkoutReducer;

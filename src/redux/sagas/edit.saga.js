@@ -1,46 +1,24 @@
 import { put, takeLatest } from 'redux-saga/effects';
+import axios from 'axios';
+
+
+// worker function that UPDATES DATABASE with workout information
+function* workerSubmitEditWorkout(action){
+    console.log('in edit saga');
+    try{
+        yield console.log('in edit saga!');
+        // yield statement to update the db
+        yield axios.put(`/api/edit/${action.payload.workout_details.id}`, action.payload);
+    }catch{
+        console.log('PUT request failed', error);
+    }
+}
 
 
 
-
-
-// -------------LECTURE CODE EXAMPLE SAGA-------------
-// hold only the single student object being edited
-// const studentToEdit = (state  = {}, action) => {
-//     if (action.type === 'SET_EDIT_STUDENT') {
-//         // Represents a student object
-//         return action.payload;
-//     }
-//     if (action.type === 'EDIT_ONCHANGE') {
-//         // Action.payload: { property: 'cohort', value: 'Diamon' }
-//         return {
-//             ...state,
-//             // 'first_name'
-//             // or 'last_name'
-//             [action.payload.property]: action.payload.value
-//             // cohort: 'Diamon'
-//         }
-
-//         /**
-//          * return {
-//          *    ...state,
-//          *      first_name: 'Liz'
-//          * }
-//          */
-
-//     }
-//     return state;
-// }
-
-
-// worker function that UPDATES DATABASE
-
-
-
-// function listening for user dispatched actions
-// function* editSaga(){
-//     yield takeLatest('EDIT_ONCHANGE', editAll);
-// }
-// export
+// function listening for 'SUBMIT_EDIT_WORKOUT', trigger worker saga
+function* editSaga(){
+    yield takeLatest('SUBMIT_EDIT_WORKOUT', workerSubmitEditWorkout);
+}
 
 export default editSaga;

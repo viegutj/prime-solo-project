@@ -1,12 +1,15 @@
 import {useDispatch, useSelector} from "react-redux";
 import {Button, TextField} from "@mui/material";
 import { useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 
-function EditWorkout() { // grab workout details from state
-    const workout = useSelector((store) => store.specificWorkout.server_response)
+function EditWorkout() { // grab server_response details from state
+    const server_response = useSelector((store) => store.specificWorkout.server_response)
     const workout_details = useSelector((store) => store.specificWorkout.workout_details)
+    const workoutToEdit = useSelector((store) => store.specificWorkout)
     const dispatch = useDispatch();
+    const history = useHistory();
 
     // function to handle the delete button
     const handleExerciseDelete = (exercise) => {
@@ -18,7 +21,7 @@ function EditWorkout() { // grab workout details from state
         // dispatch an action TO THE SAGA to delete the specified exercise
         dispatch({type: 'DELETE_EXERCISE', payload: exercise})
 
-        // dispatch an action to GET workout from our database,
+        // dispatch an action to GET server_response from our database,
         // with the delete changes we just made
         dispatch({type: 'GRAB_EDIT_DETAILS', payload: workout_details})
     }
@@ -31,7 +34,7 @@ function EditWorkout() { // grab workout details from state
             payload: {
                 // how do we access a property within a property?
                     // different individual object/array to access - need different dispatches?
-                    // table "workout" columns "name" and "rating"
+                    // table "server_response" columns "name" and "rating"
                     // table "exercise" column "notes"
                         // How can we match id in our array for exercise name and rating?
                             // how do we access exercise.id?
@@ -42,28 +45,40 @@ function EditWorkout() { // grab workout details from state
     };
 
     //function to send a dispatch every time there's a keystroke for 'notes'
-    const handleExerciseChange = (event, propertyToChange) => {
+    const handleExerciseChange = (event, exercise, propertyToChange) => {
+        console.log('event: ', event);
+        console.log('exercise: ', exercise);
         dispatch({
             type: 'EDIT_EXERCISE_ONCHANGE',
             payload: {
                 property: propertyToChange,
-                value: event.target.value
+                value: event.target.value,
+                exercise: exercise
             }
         })
     }
 
-    const handleSubmit = (event) => {
+    const handleSaveChanges = (event) => {
         event.preventDefault();
 
         // dispatch an action that is being listened for by a saga
         dispatch({ type: 'SUBMIT_EDIT_WORKOUT', payload: workoutToEdit });
+        alert('Changes to the workout have been saved!')
+    }
 
-        history.push('/');
+    const handleBack = () => {
+        console.log('back button clicked!');
+        if(confirm('Are you sure you would like to abandon your changes?') == true){
+            history.push('/savedworkouts')
+        }
+        
     }
 
     return (
         <>
+            <Button onClick={handleBack}>Back</Button>
             <h1>Edit Workout</h1>
+            <form action="">
             <TextField 
                 value={workout_details?.name} 
                 id="Workout Name"
@@ -83,14 +98,10 @@ function EditWorkout() { // grab workout details from state
                 onChange={(event) => handleWorkoutChange(event, 'rating')}
                 />
             <ol> {
-                workout?.map((exercise) => {
+                server_response?.map((exercise) => {
                     return (
                         
                         <div key={exercise?.id}>
-                            {/* <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found"/> */}
-                            
-                            {/* handler must have the specific exercise information passed to it */}
-                            
                             {/* Text field that takes in notes, sends them to the handleChange function*/}
                             <li>
                                 Name: {exercise?.name} 
@@ -101,8 +112,8 @@ function EditWorkout() { // grab workout details from state
                             label="Workout Notes"
                             multiline
                             rows={4}
-                            value={workout_details?.notes ?? ''}
-                            onChange={(event) => handleExerciseChange(event, 'notes')}
+                            value={exercise.notes}
+                            onChange={(event) => handleExerciseChange(event, exercise, 'notes')}
                             />
                             <Button onClick={
                                 () => handleExerciseDelete(exercise)
@@ -117,6 +128,10 @@ function EditWorkout() { // grab workout details from state
                     )
                 })
             } </ol>
+            <Button onClick={() => handleSaveChanges(event)}>
+                Save Changes
+            </Button>
+            </form>
         </>
     )
 }
