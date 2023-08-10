@@ -9,7 +9,7 @@ function EditWorkout() { // grab workout details from state
     const dispatch = useDispatch();
 
     // function to handle the delete button
-    const handleDelete = (exercise) => {
+    const handleExerciseDelete = (exercise) => {
         console.log('delete exercise button clicked')
 
         // confirm that we have passed the handler the correct exercise
@@ -23,77 +23,97 @@ function EditWorkout() { // grab workout details from state
         dispatch({type: 'GRAB_EDIT_DETAILS', payload: workout_details})
     }
 
-    // function to send a dispatch every time there's a keystroke by the user for 'name'
-    const handleNameChange = (event, propertyToChange) => {
+    // function to send a dispatch every time there's a keystroke for 'name' and 'rating'
+    const handleWorkoutChange = (event, propertyToChange) => {
+        event.preventDefault();
         dispatch({
-            type: 'EDIT_NAME_ONCHANGE',
+            type: 'EDIT_WORKOUT_ONCHANGE',
             payload: {
-                property: propertyToChange, // 'cohort'
-                value: event.target.value // 'Diamon
+                // how do we access a property within a property?
+                    // different individual object/array to access - need different dispatches?
+                    // table "workout" columns "name" and "rating"
+                    // table "exercise" column "notes"
+                        // How can we match id in our array for exercise name and rating?
+                            // how do we access exercise.id?
+                property: propertyToChange, // 'name' or 'rating'
+                value: event.target.value // whatever the user types in, dispatched every keystroke
             }
         })
     };
+
+    //function to send a dispatch every time there's a keystroke for 'notes'
+    const handleExerciseChange = (event, propertyToChange) => {
+        dispatch({
+            type: 'EDIT_EXERCISE_ONCHANGE',
+            payload: {
+                property: propertyToChange,
+                value: event.target.value
+            }
+        })
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        // dispatch an action that is being listened for by a saga
+        dispatch({ type: 'SUBMIT_EDIT_WORKOUT', payload: workoutToEdit });
+
+        history.push('/');
+    }
 
     return (
         <>
             <h1>Edit Workout</h1>
             <TextField 
                 value={workout_details?.name} 
-                id="outlined-basic"
+                id="Workout Name"
                 label="Workout Name"
                 variant="outlined"
                 type="text"
-                onChange={(event) => handleNameChange(event, 'name')}
+                onChange={(event) => handleWorkoutChange(event, 'name')}
                 name="Workout Name"
                 />
             <TextField
-                id="outlined-basic"
+                id="Workout Rating"
                 label="Workout Rating"
                 variant="outlined"
                 type="text"
-                name="Workout Name"
-                value={
-                    ''
-                }
-                onChange={(event) => handleNameChange(event, 'name')}/>
+                name="Workout Rating"
+                value={workout_details?.rating ?? ''} 
+                onChange={(event) => handleWorkoutChange(event, 'rating')}
+                />
             <ol> {
-                workout ?. map((exercise) => {
+                workout?.map((exercise) => {
                     return (
-                        <><div>
-                            <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found"/>
+                        
+                        <div key={exercise?.id}>
+                            {/* <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found"/> */}
+                            
                             {/* handler must have the specific exercise information passed to it */}
-                            <Button onClick={
-                                () => handleDelete(exercise)
-                            }>
-                                Delete Exercise
-                            </Button>
+                            
+                            {/* Text field that takes in notes, sends them to the handleChange function*/}
+                            <li>
+                                Name: {exercise?.name} 
+                            </li>
+                            {/* Consider adding the notes to the details modal */}
                             <TextField
-                            id="Notes"
+                            id="Workout Notes"
                             label="Workout Notes"
                             multiline
                             rows={4}
-                            defaultValue=""
+                            value={workout_details?.notes ?? ''}
+                            onChange={(event) => handleExerciseChange(event, 'notes')}
                             />
-                            <li key={
-                                exercise ?. id
+                            <Button onClick={
+                                () => handleExerciseDelete(exercise)
                             }>
-                                Name: {
-                                exercise ?. name
-                            } </li>
-                            ID: {
-                            exercise ?. id
-                        },
-                                                    Muscle: {
-                            exercise ?. muscle
-                        },
-                                                    Equipment: {
-                            exercise ?. equipment
-                        }
-                            <p>Instructions: {
-                                exercise ?. instructions
-                            }</p>
+                                Delete Exercise
+                            </Button>
+                            {/* create a modal to store/show this information - break modal into another component */}
+                            {/* ID: {exercise?.id}, Muscle: {exercise?.muscle}, Equipment: {exercise?.equipment}
+                            <p>Instructions: {exercise?.instructions}</p> */}
                             </div>
-                        </>
+                        
                     )
                 })
             } </ol>

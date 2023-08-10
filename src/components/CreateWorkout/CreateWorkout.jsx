@@ -56,7 +56,7 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
                 <h2>Welcome, {
                     user.username
                 }!</h2>
-                <h3>Select your equipment and muscle group. Press "Create" to create a workout!</h3>
+                <h3>Select your muscle group. Press "Create" to create a workout!</h3>
                 {/* <div>
                     <FormControl sx={
                             {
