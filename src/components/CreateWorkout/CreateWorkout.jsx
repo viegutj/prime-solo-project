@@ -7,7 +7,9 @@ import {
     MenuItem,
     FormControl,
     InputLabel,
-    Button
+    Button,
+    Box,
+    Typography
 } from '@mui/material';
 import {useHistory} from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -51,12 +53,17 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
 
     // return our html to render
     return (
-        <div className="container">
-            <form onSubmit={handleDispatchWorkout}>
-                <h2>Welcome, {
-                    user.username
-                }!</h2>
-                <h3>Select your muscle group. Press "Create" to create a workout!</h3>
+            <form onSubmit={handleDispatchWorkout} >
+            <Box 
+            alignItems="center"
+            justifyContent="center"
+            textAlign="center"
+            sx={{m: 3}} 
+            >
+                <Typography variant="h1" sx={{ fontSize: 48, mb: 5 }}>Welcome, {user.username}!</Typography>
+                <br />
+                <Typography variant="h2" sx={{ fontSize: 28, mb: 5 }}>Select your muscle group. Press "Create" to create a workout!</Typography>
+                
                 {/* <div>
                     <FormControl sx={
                             {
@@ -77,15 +84,24 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
                         </Select>
                     </FormControl>
                 </div> */}
-                <div>
+                </Box>
+                    {/* We wrap our inner form components in a 'FormControl' mui component */}
+                    <Box
+                    alignItems="center"
+                    justifyContent="center"
+                    textAlign="center"
+                    >
                     <FormControl sx={
                             {
                                 m: 1,
-                                minWidth: 120
+                                minWidth: 120,
+                                justifyContent: "center",
                             }
                         }
                         size="small">
+                            {/* Label for our input field */}
                         <InputLabel>Muscle</InputLabel>
+                        {/* Input field, called 'select' in MUI */}
                         <Select labelId="muscle" id="muscle-select" 
                             required
                             value={muscle}
@@ -109,12 +125,11 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
                             <MenuItem value={"triceps"}>Triceps</MenuItem>
                         </Select>
                     </FormControl>
-
-                </div>
-
+                {/* Button that submits the form */}
+                <br />
                 <Button variant='contained' name="submit" type='submit' value='Submit'>Create</Button>
+                </Box>
             </form>
-        </div>
     );
 }
 

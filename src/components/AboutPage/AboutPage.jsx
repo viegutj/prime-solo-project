@@ -1,3 +1,4 @@
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 
 // This is one of our simplest components
@@ -7,24 +8,31 @@ import React from 'react';
 
 function AboutPage() {
     return (
-        <div className="container">
-            <h1>About</h1>
-            <div>
-                <p>Fitness Randomizer is a mobile-first web application that allows clients to generate random workouts for a specific body part. Resistance training often becomes repetitive; this is a way to add some variation and keep the client engaged in their fitness habits!</p>
-                <p>
-                    Clients can generate random workouts for a specific muscle group, save those workouts for later, modify and comment on existing workouts, and delete workouts from their saved list.
-                </p>
-                <h2>Technologies Used</h2>
-                <p>This project demanded the use of many technologies; I learned many new tools for future development.</p>
-                <p>Technologies used include: React, JSX, JavaScript, Node.js, Material UI, CSS, HTML, Express, Axios, Postman, and APIs.
-                </p>
-
-                <h2>Acknowledgements</h2>
-                <p>I'm extremely grateful for all the folks who helped me get to this point in my development journey!</p>
-                <p>I would like to thank: Prime, the Emerald Cohort, Emma, Key, Sam, family, and my fiance and my dog for believing in me.
-                </p>
-            </div>
-        </div>
+        <Box 
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        sx={{m: 3}} 
+        >
+                <Typography variant="h1" sx={{ fontSize: 60, mb: 5 }}>About</Typography>
+                <Typography>MN Fitness is a mobile-first web application 
+                that allows clients to generate random workouts for a specific body part. 
+                Resistance training often becomes repetitive; this is a way to add variation
+                and keep the client engaged in their fitness habits!
+                </Typography>
+            <br />
+                <Typography variant="h2" sx={{ fontSize: 36 }}>Technologies Used</Typography>
+                <Typography>React, JSX, JavaScript, Node.js, Material UI, CSS, HTML, Express, Axios, Postman, SQL, and APIs.
+                </Typography>
+            <br />
+                <Typography variant="h2" sx={{ fontSize: 36 }}>Acknowledgements</Typography>
+                <Typography>Prime, the Emerald Cohort, Emma, Key, Sam, family, and my fiance and my dog for believing in me.
+                </Typography>
+            <br />
+                <Typography variant="h2" sx={{ fontSize: 36 }}>Connect with Me</Typography>
+                <Typography>LinkedIn</Typography>
+                <img src="https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fwww.linkedin.com%2Fin%2Fjonathan-viegut&chs=180x180&choe=UTF-8&chld=L|2" alt="LinkedIn QR" />
+        </Box>
     );
 }
 

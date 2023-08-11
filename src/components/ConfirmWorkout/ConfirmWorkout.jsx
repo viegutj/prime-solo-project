@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux"
 import './ConfirmWorkout.css'
 import { useHistory } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Box, Button, FormControl, Typography } from "@mui/material";
 
 
 
@@ -51,23 +51,48 @@ function ConfirmWorkout() { // import the created data from the API GET
 
     return (
     <>
-        <Button onClick={handleBack}>Back</Button>
-        <h1>Confirm Workout</h1>
-        <h2>{workout?.[0]?.muscle}</h2>
-        <p>Click on an exercise name to access details!</p>
+        <FormControl
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        sx={{m: 3}} 
+        >
+        <Button variant='contained' onClick={handleBack}>Back</Button>
+        <Typography 
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        sx={{m: 3}} variant="h2">
+            Confirm Workout
+        </Typography>
+        <Typography 
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        sx={{m: 3}} variant="h3">
+            {workout?.[0]?.muscle}
+        </Typography>
+        <Typography
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        >Click on an exercise name to access details!</Typography>
         <ol>
             {workout?.map((exercise) => {
                 return(
                     <>
-                <div key={exercise?.id} onClick={() => handleDetails(exercise)}>
+                <Box 
+                // textAlign="center"
+                sx={{textDecoration: "underline"}} key={exercise?.id} onClick={() => handleDetails(exercise)}>
                     {/* <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found" /> */}
                     <li key={exercise?.name}>{exercise?.name}</li>
-                </div>
+                </Box>
                 </>
                 )
             })}
         </ol>
-        <Button onClick={handleSave}>Save Workout</Button>
+        <Button variant='contained' onClick={handleSave}>Save Workout</Button>
+        </FormControl>
     </>
     )
 }

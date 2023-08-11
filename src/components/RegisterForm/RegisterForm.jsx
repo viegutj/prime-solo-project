@@ -23,7 +23,7 @@ function RegisterForm() {
     return (
         <form className="formPanel"
             onSubmit={registerUser}>
-            <Typography variant='h4'>Register</Typography>
+            <Typography variant='h1'>Register</Typography>
             {
             errors.registrationMessage && (
                 <h3 className="alert" role="alert">
