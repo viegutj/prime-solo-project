@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Button} from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
 import {useHistory} from "react-router-dom";
 
 function SavedWorkouts() { // grab the user id from store
@@ -22,12 +22,17 @@ function SavedWorkouts() { // grab the user id from store
         // confirm that we have passed the handler the correct workout
         console.log('workout is: ', workout);
 
-        // dispatch an action TO THE SAGA to delete the specified workout
-        dispatch({type: 'DELETE_WORKOUT', payload: workout})
+        // if the user confirms the delete, continue delete.
+        if(confirm(`Are you sure you would like to delete ${workout.name}?`) == true){
+            // dispatch an action TO THE SAGA to delete the specified workout
+            dispatch({type: 'DELETE_WORKOUT', payload: workout})
+    
+            // dispatch an action to GET workout from our database,
+            // with the delete changes we just made
+            dispatch({type: 'FETCH_USER_WORKOUTS', payload: user.id})
+        }
 
-        // dispatch an action to GET workout from our database,
-        // with the delete changes we just made
-        dispatch({type: 'FETCH_USER_WORKOUTS', payload: user.id})
+
     }
 
     const handleEditWorkout = (workout) => {
@@ -45,18 +50,22 @@ function SavedWorkouts() { // grab the user id from store
     return (
         <>
             <h1>Saved Workouts</h1>
+            <h3>Click to edit!</h3>
             <ol>
             {workouts?.map((workout) => {
                 return (
-                        <div>
+                        <Box component={Typography}
+                        sx={{textDecoration: "underline"}}>
+                        <div >
                             <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found"/>
                             <li key={workout?.id} onClick={() => handleEditWorkout(workout)}>
-                                Name: {workout?.id},  Rating: {workout?.rating}
+                                Name: {workout?.name},  Rating: {workout?.rating}
                             </li>
                             <Button onClick={
                                 () => {handleDelete(workout)}
                             }>Delete</Button>
                             </div>
+                            </Box>
                             )
                         })}
             </ol>

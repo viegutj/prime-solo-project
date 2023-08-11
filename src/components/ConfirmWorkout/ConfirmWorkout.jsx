@@ -54,12 +54,13 @@ function ConfirmWorkout() { // import the created data from the API GET
         <Button onClick={handleBack}>Back</Button>
         <h1>Confirm Workout</h1>
         <h2>{workout?.[0]?.muscle}</h2>
+        <p>Click on an exercise name to access details!</p>
         <ol>
             {workout?.map((exercise) => {
                 return(
                     <>
                 <div key={exercise?.id} onClick={() => handleDetails(exercise)}>
-                    <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found" />
+                    {/* <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found" /> */}
                     <li key={exercise?.name}>{exercise?.name}</li>
                 </div>
                 </>

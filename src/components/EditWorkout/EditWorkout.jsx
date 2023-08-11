@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {Button, TextField} from "@mui/material";
+import {Button, TextField, Tooltip} from "@mui/material";
 import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
@@ -59,11 +59,12 @@ function EditWorkout() { // grab server_response details from state
     }
 
     const handleSaveChanges = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
 
         // dispatch an action that is being listened for by a saga
         dispatch({ type: 'SUBMIT_EDIT_WORKOUT', payload: workoutToEdit });
         alert('Changes to the workout have been saved!')
+        history.push('/savedworkouts')
     }
 
     const handleBack = () => {
@@ -76,7 +77,7 @@ function EditWorkout() { // grab server_response details from state
 
     return (
         <>
-            <Button onClick={handleBack}>Back</Button>
+            <Tooltip title="Back to Saved Workouts" placement="left-start"><Button onClick={handleBack}>Back</Button></Tooltip>
             <h1>Edit Workout</h1>
             <form action="">
             <TextField 

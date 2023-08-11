@@ -4,12 +4,11 @@ import axios from 'axios';
 
 // worker function that UPDATES DATABASE with workout information
 function* workerSubmitEditWorkout(action){
-    console.log('in edit saga');
     try{
-        yield console.log('in edit saga!');
         // yield statement to update the db
+        yield console.log('action.payload for the PUT is: ', action.payload);
         yield axios.put(`/api/edit/${action.payload.workout_details.id}`, action.payload);
-    }catch{
+    }catch(error){
         console.log('PUT request failed', error);
     }
 }
