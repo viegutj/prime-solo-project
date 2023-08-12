@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Box, Button, Typography} from "@mui/material";
+import {Box, Button, Typography, List, ListItem} from "@mui/material";
 import {useHistory} from "react-router-dom";
 
 function SavedWorkouts() { // grab the user id from store
@@ -31,8 +31,6 @@ function SavedWorkouts() { // grab the user id from store
             // with the delete changes we just made
             dispatch({type: 'FETCH_USER_WORKOUTS', payload: user.id})
         }
-
-
     }
 
     const handleEditWorkout = (workout) => {
@@ -49,26 +47,56 @@ function SavedWorkouts() { // grab the user id from store
 
     return (
         <>
-            <h1>Saved Workouts</h1>
-            <h3>Click the workout to edit!</h3>
-            <ol>
+        <Box
+        sx={{m:1}}
+        textAlign="center"
+        >
+            <Typography 
+            variant="h1"
+            sx={{fontSize: 50}}
+            >
+                Saved Workouts
+            </Typography>
+
+            <Typography
+            variant="h2"
+            sx={{fontSize: 30}}
+            >
+                Click the workout to edit!
+            </Typography>
+        </Box>
+        <Box
+        sx={{m:1}}
+        textAlign="center"
+        >
+            <List
+            >
             {workouts?.map((workout) => {
                 return (
-                        <Box component={Typography}
-                        sx={{textDecoration: "underline"}}>
-                        <div >
-                            {/* <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found"/> */}
-                            <li key={workout?.id} onClick={() => handleEditWorkout(workout)}>
+                        <Box 
+                        sx={{mb: 4}}
+                        component={Typography}
+                        >
+                            <ListItem 
+                            sx={{textDecoration: "underline", fontSize: 18}}
+                            key={workout?.id} 
+                            onClick={() => handleEditWorkout(workout)}
+                            >
                                 Name: {workout?.name},  Rating: {workout?.rating}
-                            </li>
-                            <Button onClick={
-                                () => {handleDelete(workout)}
-                            }>Delete</Button>
-                            </div>
-                            </Box>
+                            </ListItem>
+
+                            <Button 
+                            sx={{ml: 1, borderBottom: 'none'}}
+                            variant="contained"
+                            onClick={() => {handleDelete(workout)}}
+                            >
+                                Delete
+                            </Button>
+                        </Box>
                             )
                         })}
-            </ol>
+            </List>
+        </Box>
         </>
     )
 }
