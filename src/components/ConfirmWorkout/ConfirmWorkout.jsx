@@ -62,14 +62,14 @@ function ConfirmWorkout() { // import the created data from the API GET
         alignItems="center"
         justifyContent="center"
         textAlign="center"
-        sx={{mt: 2, mb: 0, fontSize: 50}} variant="h1">
+        sx={{mt: 2, mb: 1, fontSize: 50}} variant="h1">
             Confirm Workout
         </Typography>
         <Typography
         alignItems="center"
         justifyContent="center"
         textAlign="center"
-        sx={{mb: 0, mt: 0, fontSize: 18}}
+        sx={{mb: 2, mt: 0, fontSize: 18}}
         >Click on an exercise name to access details!</Typography>
         <Typography 
         alignItems="center"

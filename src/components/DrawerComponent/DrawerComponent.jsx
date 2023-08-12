@@ -4,35 +4,29 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
-    Button
+    Button,
+    Typography
 } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import React, {useState} from 'react';
-import {Link} from "react-router-dom/cjs/react-router-dom";
+import {Link, useHistory} from "react-router-dom/cjs/react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 
 function DrawerComponent() { // we are setting a piece of state to determine if the drawer is open
     const [open, setOpen] = useState(false);
+    const history = useHistory();
 
     const list = () => (
-        <div style={
-                {width: 250}
-            }
-            onClick={
-                () => setOpen(false)
+        <div 
+        style={{width: 250}}
+        onClick={() => setOpen(false)
         }>
             {/* this is a list of what is in our drawer */}
             <List> {
                 [
-                    <Link to="/user">
-                        Home
-                    </Link>,
-                    <Link to="/savedworkouts">
-                        Workouts
-                    </Link>,
-                    <Link to="/about">
-                        About
-                    </Link>,
+                    <Typography onClick={() => history.push('/')}> Home </Typography>,
+                    <Typography onClick={() => history.push('/savedworkouts')}> Saved Workouts </Typography>,
+                    <Typography onClick={() => history.push('/about')}> About </Typography>,
                     <LogOutButton/>
                 ].map((label, index) => (
                     <ListItem button

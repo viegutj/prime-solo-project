@@ -48,8 +48,10 @@ function SavedWorkouts() { // grab the user id from store
     return (
         <>
         <Box
-        sx={{m:1}}
+        sx={{m:3}}
         textAlign="center"
+        alignItems="center"
+        justifyContent="center"
         >
             <Typography 
             variant="h1"
@@ -59,14 +61,13 @@ function SavedWorkouts() { // grab the user id from store
             </Typography>
 
             <Typography
-            variant="h2"
-            sx={{fontSize: 30}}
+            sx={{fontSize: 18}}
             >
                 Click the workout to edit!
             </Typography>
         </Box>
         <Box
-        sx={{m:1}}
+        sx={{m:3}}
         textAlign="center"
         >
             <List
@@ -93,8 +94,8 @@ function SavedWorkouts() { // grab the user id from store
                                 Delete
                             </Button>
                         </Box>
-                            )
-                        })}
+                        )
+            })}
             </List>
         </Box>
         </>

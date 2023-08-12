@@ -1,24 +1,60 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import './Nav.css';
 import {useSelector} from 'react-redux';
 import DrawerComponent from '../DrawerComponent/DrawerComponent';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, AppBar, Toolbar, Button, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 
 function Nav() {
+    const user = useSelector((store) => store.user);
+    const history = useHistory();
+    return (
+    <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+        <Toolbar>
+            <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            >
+            {user.id && (
+                <>
+                <DrawerComponent />
+                </>
+            )}
+            </IconButton>
+            <Typography 
+            variant="h6" 
+            component="div" 
+            sx={{ flexGrow: 1 }}
+            onClick={() => history.push('/')}
+            >
+            MN Fitness
+            </Typography>
+        </Toolbar>
+        </AppBar>
+    </Box>
+    );
+}
+
+
+function butt() {
     const user = useSelector((store) => store.user);
 
     return (
         <Box 
-        component={Typography} 
-        className="nav">
+        >
                 {
                 user.id && (
                     <>
                         <Link to="/user">
                             <Typography 
                             className="nav-title"
-                            >MN Fitness</Typography>
+                            >MN Fitness
+                            </Typography>
                         </Link>
 
                         <DrawerComponent/>
@@ -26,6 +62,7 @@ function Nav() {
                 )
             }
         </Box>
+        
     );
 }
 

@@ -1,7 +1,8 @@
 import {useDispatch, useSelector} from "react-redux";
-import {Button, TextField, Tooltip} from "@mui/material";
-import { useState } from "react";
+import {Button, TextField, Typography, Box} from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function EditWorkout() { // grab server_response details from state
@@ -77,9 +78,22 @@ function EditWorkout() { // grab server_response details from state
 
     return (
         <>
-            <Tooltip title="Back to Saved Workouts" placement="left-start"><Button onClick={handleBack}>Back</Button></Tooltip>
-            <h1>Edit Workout</h1>
-            <form action="">
+            <Typography 
+            variant="h1" 
+            sx={{fontSize: 50, m: 3, mb:3}}
+            textAlign="center"
+            >
+                Edit Workout
+            </Typography>
+            
+            <form>
+
+            <Box
+            sx={{
+                mb: 4, 
+            }}
+            textAlign="center"
+            >
             <TextField 
                 value={workout_details?.name} 
                 id="Workout Name"
@@ -88,6 +102,7 @@ function EditWorkout() { // grab server_response details from state
                 type="text"
                 onChange={(event) => handleWorkoutChange(event, 'name')}
                 name="Workout Name"
+                fontSize="230"
                 />
             <TextField
                 id="Workout Rating"
@@ -98,16 +113,23 @@ function EditWorkout() { // grab server_response details from state
                 value={workout_details?.rating ?? ''} 
                 onChange={(event) => handleWorkoutChange(event, 'rating')}
                 />
+                </Box>
+
             <ol> {
                 server_response?.map((exercise) => {
                     return (
                         
-                        <div key={exercise?.id}>
+                        <Box 
+                        sx={{m:1, mb: 3, fontSize: 18}}
+                        textAlign="center"
+                        key={exercise?.id}
+                        >
                             {/* Text field that takes in notes, sends them to the handleChange function*/}
                             <li>
                                 Name: {exercise?.name} 
                             </li>
                             {/* Consider adding the notes to the details modal */}
+                            
                             <TextField
                             id="Workout Notes"
                             label="Workout Notes"
@@ -116,22 +138,40 @@ function EditWorkout() { // grab server_response details from state
                             value={exercise.notes}
                             onChange={(event) => handleExerciseChange(event, exercise, 'notes')}
                             />
-                            <Button onClick={
-                                () => handleExerciseDelete(exercise)
-                            }>
-                                Delete Exercise
+                            
+                            <Button 
+                            sx={{ml: 1, borderBottom: 'none'}}
+                            variant="contained"
+                            onClick={() => {handleExerciseDelete(exercise)}}
+                            >
+                                <DeleteIcon />
                             </Button>
                             {/* create a modal to store/show this information - break modal into another component */}
                             {/* ID: {exercise?.id}, Muscle: {exercise?.muscle}, Equipment: {exercise?.equipment}
                             <p>Instructions: {exercise?.instructions}</p> */}
-                            </div>
+                            </Box>
                         
                     )
                 })
             } </ol>
-            <Button onClick={() => handleSaveChanges(event)}>
+            <Box
+            textAlign="center"
+            >
+            <Button 
+            variant='contained' 
+            onClick={handleBack} 
+            sx={{mb: 2, mt: 2}}
+            >
+                <KeyboardBackspaceIcon />Back to Saved Workouts
+            </Button>
+            <br />
+            <Button 
+            onClick={() => handleSaveChanges(event)}
+            variant='contained'
+            >
                 Save Changes
             </Button>
+            </Box>
             </form>
         </>
     )

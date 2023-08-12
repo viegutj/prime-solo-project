@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
-import {Button, Typography, Input, TextField} from '@mui/material';
+import {Button, Typography, Input, TextField, Box, FormControl} from '@mui/material';
 
 
 function LoginForm() {
@@ -27,36 +27,54 @@ function LoginForm() {
     }; // end login
 
     return (
-        <form className="formPanel"
+        <FormControl
+        sx={{m:3}}
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        >
+        <form 
             onSubmit={login}>
-            <Typography variant="h1">MN Fitness</Typography>
+
+            <Typography 
+            variant="h1" 
+            sx={{fontSize: 50}}
+            alignItems="center"
+            justifyContent="center"
+            textAlign="center"
+            >
+                MN Fitness
+            </Typography>
+
             {
             errors.loginMessage && (
-                <h3 className="alert" role="alert">
+                <Typography 
+                className="alert" 
+                role="alert">
                     {
                     errors.loginMessage
-                } </h3>
+                } </Typography>
             )
         }
-            <div>
+            <Box>
                 <TextField id="outlined-basic" label="username" variant="outlined" type="text" name="username" required
                     value={username}
-                    onChange={
-                        (event) => setUsername(event.target.value)
-                    }/>
-            </div>
-            <div>
+                    onChange={(event) => setUsername(event.target.value)}
+                    />
+            </Box>
+            <Box>
                 <TextField id="outlined-basic" label="password" variant="outlined" type="password" name="password" required
                     value={password}
-                    onChange={
-                        (event) => setPassword(event.target.value)
-                    }/>
-            </div>
-            <div>
+                    onChange={(event) => setPassword(event.target.value)}
+                    />
+            </Box>
+            <Box>
                 <Button variant="contained" type="submit" name="submit" value="Log In">
-                    Log In</Button>
-            </div>
+                    Log In
+                </Button>
+            </Box>
         </form>
+        </FormControl>
     );
 }
 
