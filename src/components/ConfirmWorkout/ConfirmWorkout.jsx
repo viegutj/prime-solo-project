@@ -1,7 +1,8 @@
 import {useDispatch, useSelector} from "react-redux"
 import './ConfirmWorkout.css'
 import { useHistory } from "react-router-dom";
-import { Box, Button, FormControl, Typography } from "@mui/material";
+import { Box, Button, FormControl, Typography, capitalize } from "@mui/material";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 
 
@@ -53,37 +54,41 @@ function ConfirmWorkout() { // import the created data from the API GET
     <>
         <FormControl
         alignItems="center"
-        justifyContent="center"
-        textAlign="center"
         sx={{m: 3}} 
+        component={Typography}
         >
-        <Button variant='contained' onClick={handleBack}>Back</Button>
+        
         <Typography 
         alignItems="center"
         justifyContent="center"
         textAlign="center"
-        sx={{m: 3}} variant="h2">
+        sx={{mt: 2, mb: 0, fontSize: 50}} variant="h1">
             Confirm Workout
-        </Typography>
-        <Typography 
-        alignItems="center"
-        justifyContent="center"
-        textAlign="center"
-        sx={{m: 3}} variant="h3">
-            {workout?.[0]?.muscle}
         </Typography>
         <Typography
         alignItems="center"
         justifyContent="center"
         textAlign="center"
+        sx={{mb: 0, mt: 0, fontSize: 18}}
         >Click on an exercise name to access details!</Typography>
+        <Typography 
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        textTransform="capitalize"
+        sx={{mt: 5, mb: 0, fontSize: 30, 
+            // textDecoration: "underline"
+        }} 
+        variant="h2">
+            {workout?.[0]?.muscle}
+        </Typography>
         <ol>
             {workout?.map((exercise) => {
                 return(
                     <>
                 <Box 
                 // textAlign="center"
-                sx={{textDecoration: "underline"}} key={exercise?.id} onClick={() => handleDetails(exercise)}>
+                sx={{textDecoration: "underline", fontSize: 18}} key={exercise?.id} onClick={() => handleDetails(exercise)}>
                     {/* <img src="https://static.vecteezy.com/system/resources/previews/005/720/408/original/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" alt="img not found" /> */}
                     <li key={exercise?.name}>{exercise?.name}</li>
                 </Box>
@@ -91,6 +96,9 @@ function ConfirmWorkout() { // import the created data from the API GET
                 )
             })}
         </ol>
+        <Button variant='contained' onClick={handleBack} sx={{mb: 2, mt: 2}}>
+            <KeyboardBackspaceIcon />Back to Create a New Workout
+        </Button>
         <Button variant='contained' onClick={handleSave}>Save Workout</Button>
         </FormControl>
     </>
