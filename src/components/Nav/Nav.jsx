@@ -18,7 +18,7 @@ function Nav() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            // sx={{ mr: 2 }}
             >
             {user.id && (
                 <>
@@ -37,32 +37,6 @@ function Nav() {
         </Toolbar>
         </AppBar>
     </Box>
-    );
-}
-
-
-function butt() {
-    const user = useSelector((store) => store.user);
-
-    return (
-        <Box 
-        >
-                {
-                user.id && (
-                    <>
-                        <Link to="/user">
-                            <Typography 
-                            className="nav-title"
-                            >MN Fitness
-                            </Typography>
-                        </Link>
-
-                        <DrawerComponent/>
-                    </>
-                )
-            }
-        </Box>
-        
     );
 }
 

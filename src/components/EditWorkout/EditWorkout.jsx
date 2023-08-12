@@ -121,12 +121,12 @@ function EditWorkout() { // grab server_response details from state
                         
                         <Box 
                         sx={{m:1, mb: 3, fontSize: 18}}
-                        textAlign="center"
+                        // textAlign="center"
                         key={exercise?.id}
                         >
                             {/* Text field that takes in notes, sends them to the handleChange function*/}
                             <li>
-                                Name: {exercise?.name} 
+                                {exercise?.name} 
                             </li>
                             {/* Consider adding the notes to the details modal */}
                             
@@ -140,7 +140,7 @@ function EditWorkout() { // grab server_response details from state
                             />
                             
                             <Button 
-                            sx={{ml: 1, borderBottom: 'none'}}
+                            sx={{ml: 5, borderBottom: 'none'}}
                             variant="contained"
                             onClick={() => {handleExerciseDelete(exercise)}}
                             >
@@ -157,13 +157,6 @@ function EditWorkout() { // grab server_response details from state
             <Box
             textAlign="center"
             >
-            <Button 
-            variant='contained' 
-            onClick={handleBack} 
-            sx={{mb: 2, mt: 2}}
-            >
-                <KeyboardBackspaceIcon />Back to Saved Workouts
-            </Button>
             <br />
             <Button 
             onClick={() => handleSaveChanges(event)}
@@ -171,7 +164,17 @@ function EditWorkout() { // grab server_response details from state
             >
                 Save Changes
             </Button>
+            <br />
+            <Button 
+            variant='contained' 
+            onClick={handleBack} 
+            sx={{mb: 2, mt: 2}}
+            >
+                <KeyboardBackspaceIcon />
+                {/* Back to Saved Workouts */}
+            </Button>
             </Box>
+            
             </form>
         </>
     )

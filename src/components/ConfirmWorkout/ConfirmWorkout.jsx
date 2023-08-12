@@ -96,10 +96,19 @@ function ConfirmWorkout() { // import the created data from the API GET
                 )
             })}
         </ol>
-        <Button variant='contained' onClick={handleBack} sx={{mb: 2, mt: 2}}>
-            <KeyboardBackspaceIcon />Back to Create a New Workout
+        <Button 
+        variant='contained' 
+        sx={{mt: 5}}
+        onClick={handleSave}>
+            Save Workout
         </Button>
-        <Button variant='contained' onClick={handleSave}>Save Workout</Button>
+        <Button 
+        variant='contained' 
+        onClick={handleBack} 
+        sx={{mb: 2, mt: 2}}>
+            {/* Back to Create a New Workout */}
+            <KeyboardBackspaceIcon />
+        </Button>
         </FormControl>
     </>
     )

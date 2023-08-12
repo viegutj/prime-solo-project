@@ -33,8 +33,7 @@ function LoginForm() {
         justifyContent="center"
         textAlign="center"
         >
-        <form 
-            onSubmit={login}>
+        <form onSubmit={login}>
 
             <Typography 
             variant="h1" 
@@ -45,24 +44,26 @@ function LoginForm() {
             >
                 MN Fitness
             </Typography>
-
-            {
-            errors.loginMessage && (
-                <Typography 
+            {errors.loginMessage && (
+                <Typography
+                sx={{m: 3}}
                 className="alert" 
                 role="alert">
-                    {
-                    errors.loginMessage
-                } </Typography>
+                    {errors.loginMessage} 
+                </Typography>
             )
         }
-            <Box>
+            <Box
+            sx={{m: 3}}
+            >
                 <TextField id="outlined-basic" label="username" variant="outlined" type="text" name="username" required
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
                     />
             </Box>
-            <Box>
+            <Box
+            sx={{m: 3}}
+            >
                 <TextField id="outlined-basic" label="password" variant="outlined" type="password" name="password" required
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}

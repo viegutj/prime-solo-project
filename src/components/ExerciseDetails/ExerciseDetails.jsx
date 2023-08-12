@@ -41,14 +41,14 @@ function ExerciseDetails() {
             sx={{fontSize: 18, m: 2}}
             textTransform="capitalize"
             >
-                Muscle: {details.muscle}
+                <span style={{fontWeight: "bold"}}>Muscle:</span> {details.muscle}
         </Typography>
 
         <Typography
         sx={{fontSize: 18, m: 2}}
         textTransform="capitalize"
         >
-            Type: {details.type}
+            <span style={{fontWeight: "bold"}}>Type:</span> {details.type}
         </Typography>
         
         <Typography
