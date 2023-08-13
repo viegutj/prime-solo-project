@@ -27,6 +27,7 @@ function ExerciseDetails() {
         textAlign="center"
         variant="h2"
         sx={{mt: 2, mb: 0, fontSize: 30}}
+        textTransform="capitalize"
         >
             {details.name}
         </Typography>
@@ -55,20 +56,20 @@ function ExerciseDetails() {
         sx={{fontSize: 18, m: 2}}
         textTransform="capitalize"
         >
-            Equipment: {details.equipment}
+            <span style={{fontWeight: "bold"}}>Equipment:</span> {details.equipment}
         </Typography>
         
         <Typography
         sx={{fontSize: 18, m: 2}}
         textTransform="capitalize"
         >
-            Difficulty: {details.difficulty}
+            <span style={{fontWeight: "bold"}}>Difficulty: </span> {details.difficulty}
             </Typography>
         
         <Typography
         sx={{fontSize: 18, m: 2}}
         >
-            Instructions: {details.instructions}
+            <span style={{fontWeight: "bold"}}>Instructions: </span> {details.instructions}
         </Typography>
 
         </Box>

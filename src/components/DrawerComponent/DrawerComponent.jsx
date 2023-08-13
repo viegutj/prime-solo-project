@@ -43,13 +43,13 @@ function DrawerComponent() { // we are setting a piece of state to determine if 
     return (
         <div>
             <Button 
-            style={{float: 'right', color: "white", textDecoration: 'underline'}}
+            style={{float: 'left', color: "white", textDecoration: 'underline'}}
             onClick={() => {setOpen(true)}}>
                 <MenuIcon/>
             </Button>
             <Drawer 
             open={open}
-            anchor={'right'}
+            anchor={'left'}
             onClose={() => setOpen(false)}>
                 {list()} 
             </Drawer>

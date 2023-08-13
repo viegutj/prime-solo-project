@@ -120,6 +120,7 @@ function EditWorkout() { // grab server_response details from state
                     return (
                         
                         <Box 
+                        textTransform="capitalize"
                         sx={{m:1, mb: 3, fontSize: 18}}
                         // textAlign="center"
                         key={exercise?.id}

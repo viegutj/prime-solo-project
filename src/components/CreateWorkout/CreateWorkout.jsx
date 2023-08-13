@@ -60,9 +60,18 @@ function CreateWorkout() { // this component doesn't do much to start, just rend
             textAlign="center"
             sx={{m: 3}} 
             >
-                <Typography variant="h1" sx={{ fontSize: 50, mb: 5 }}>Welcome, {user.username}!</Typography>
+                <Typography 
+                    variant="h1" 
+                    sx={{ fontSize: 50 }}>
+                        Welcome, {user.username}!
+                </Typography>
                 <br />
-                <Typography variant="h2" sx={{ fontSize: 30, mb: 5 }}>Select your muscle group. Press "Create" to create a workout!</Typography>
+                <Typography 
+                variant="h2" 
+                sx={{ fontSize: 18, mb: 5 }}
+                >
+                    Select your muscle group. Press "Create" to create a workout!
+                </Typography>
                 
                 {/* <div>
                     <FormControl sx={
