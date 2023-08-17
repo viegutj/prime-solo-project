@@ -85,7 +85,7 @@ function ExerciseDetails() {
             onClick={()=> history.push('/confirmworkout')} 
             sx={{mb: 2, mt: 2}}
             >
-                <KeyboardBackspaceIcon />Back to Confirm Workout
+                <KeyboardBackspaceIcon />
             </Button>
         </Box>
 

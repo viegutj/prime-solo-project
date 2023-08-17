@@ -2,6 +2,7 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Box, Button, Typography, List, ListItem} from "@mui/material";
 import {useHistory} from "react-router-dom";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function SavedWorkouts() { // grab the user id from store
     const user = useSelector((store) => store.user)
@@ -79,20 +80,19 @@ function SavedWorkouts() { // grab the user id from store
                         component={Typography}
                         >
                             <ListItem 
-                            sx={{textDecoration: "underline", fontSize: 18}}
+                            sx={{fontSize: 18}}
                             key={workout?.id} 
-                            onClick={() => handleEditWorkout(workout)}
                             >
-                                Name: {workout?.name},  Rating: {workout?.rating}
-                            </ListItem>
-
+                                <span onClick={() => handleEditWorkout(workout)} style={{textDecoration: "underline"}}>Name: {workout?.name},  Rating: {workout?.rating}</span>
                             <Button 
-                            sx={{ml: 1, borderBottom: 'none'}}
+                            sx={{ml: 3}}
                             variant="contained"
                             onClick={() => {handleDelete(workout)}}
                             >
-                                Delete
+                                <DeleteIcon/>
                             </Button>
+                            </ListItem>
+
                         </Box>
                         )
             })}

@@ -5,8 +5,6 @@ import DrawerComponent from '../DrawerComponent/DrawerComponent';
 import { Box, Typography, AppBar, Toolbar, Button, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
-import Logo from "../Images/android-chrome-512x512.png"
-import { Height } from '@mui/icons-material';
 
 function Nav() {
     const user = useSelector((store) => store.user);
@@ -39,7 +37,7 @@ function Nav() {
             </Typography>
             {user.id && (
                 <>
-                <DrawerComponent />
+                <DrawerComponent/>
                 </>
             )}
         </Toolbar>
