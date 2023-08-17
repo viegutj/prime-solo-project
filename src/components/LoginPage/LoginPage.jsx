@@ -14,10 +14,12 @@ function LoginPage() {
         >
 
             <LoginForm/>
+            <div>
                 <Button variant='outlined' type="button"
                     onClick={() => {history.push('/registration')}}>
                     Register
                 </Button>
+            </div>
         </Box>
     );
 }
